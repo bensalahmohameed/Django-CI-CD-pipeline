@@ -1,0 +1,5 @@
+kelli l python app mahiech keeda tekteb fel mongodb?
+aleh l mongo express mandhrou hakek ?
+ki nfasakh l stateful set l pvc yetfasakhch donc l pv yetfasakhch donc l data tetfasakhch zeda
+aleh kol ma nefsakh l pvc tetfasakh l base eli maaha ? khater reclaim policy hia delete
+kifeh nara l content mtei l PV eli snaatou? aarafna eli l data tkaydet khater baad maa mountine /data/db mtei l mongo bel pv, fasakhna l pod w aawedna talaneh w khadaamneh ala nafs l pvc lkila l data mazelet hia nafsha fel mongo express

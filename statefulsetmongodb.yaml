@@ -1,0 +1,49 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: statefulsetmongo
+spec:
+  selector:
+    matchLabels:
+      app: statefulsetmongo # has to match .spec.template.metadata.labels
+  serviceName: "mongodb-service"
+  template:
+    metadata:
+      labels:
+        app: statefulsetmongo # has to match .spec.selector.matchLabels
+    spec:
+      terminationGracePeriodSeconds: 10
+      containers:
+      - name: mongodb
+        image: mongo:latest
+        volumeMounts:
+        - mountPath: /data/db
+          name: www
+        ports:
+        - containerPort: 27017
+        env:
+        - name: MONGO_INITDB_ROOT_USERNAME
+          value: "root"
+        - name: MONGO_INITDB_ROOT_PASSWORD
+          value: "example"
+  volumeClaimTemplates:
+  - metadata:
+      name: www
+    spec:
+      accessModes: [ "ReadWriteOnce" ]
+      storageClassName: "default"
+      resources:
+        requests:
+          storage: 1Gi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: mongodb-service
+spec:
+  selector:
+    app: statefulsetmongo
+  ports:
+    - protocol: TCP
+      port: 27017
+      targetPort: 27017
