@@ -14,7 +14,7 @@ pipeline{
         }
         stage('Checkout from Git'){
             steps{
-               git branch: 'main', url: 'https://github.com/bensalahmohameed/djangoApp'
+               git branch: 'main', url: 'https://github.com/bensalahmohameed/Django_CI-CD_pipeline'
             }
         }
         stage("Sonarqube Analysis "){
